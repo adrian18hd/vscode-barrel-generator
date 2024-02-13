@@ -51,10 +51,11 @@ export function activate(context: vscode.ExtensionContext) {
 					}
 				}
 			});
+
 			const barrelContent = lines
 				.filter(line => !directoriesToSkip.includes(path.dirname(line)))
 				.sort()
-				.map(l => `export * from "./${l.replace(/\\/g, "/")}";`)
+				.map(l => `export * from "./${l.replace(/\\/g, "/").replace(/\.(ts|tsx)$/, "")}";`)
 				.join("\n");
 
 			const barrelPath = `${currentFilePath}/index.ts`;
